@@ -7,6 +7,9 @@ import re
 app = Flask(__name__)
 app.config['DATABASE'] = 'database'
 
+def using_json():
+    return request.headers.get('accept') == 'application/json'
+
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -25,7 +28,13 @@ def get_persons():
     db_result = db.execute('SELECT * FROM persons')
     persons = [dict(schedule) for schedule in db_result]
     close_db()
-    return jsonify(persons)
+    if using_json():
+        return jsonify(persons)
+    else:
+        return render_template(
+            'persons.html',
+            persons = persons
+        )
 
 def post_person():
     request_data = request.get_json(force=True)
