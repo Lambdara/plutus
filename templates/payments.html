@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Plutus - Payments</title>
+  </head>
+  <body>
+    <h1>Payments</h1>
+    <table>
+      <tr>
+        <th>Amount</th>
+        <th>Payed by</th>
+        <th>Payed for</th>
+        <th>description</th>
+      </tr>
+      {% for payment in payments %}
+      <tr>
+        <td>{{ payment.amount }}</td>
+        <td>{{ payment.payer.name }}</td>
+        <td>{% for payee in payment.payees %}{{ payee.name }}{% endfor %}</td>
+        <td>{{ payment.description }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
