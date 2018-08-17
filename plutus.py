@@ -9,7 +9,7 @@ app.config['DATABASE'] = 'database'
 
 @app.route("/")
 def index():
-    return "Hello world!"
+    return render_template('index.html')
 
 @app.route('/persons/', methods=['GET', 'POST', 'DELETE'])
 def manage_persons():
