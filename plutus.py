@@ -50,4 +50,26 @@ def delete_persons():
     db = get_db()
     db.execute('DELETE FROM persons')
     db.commit()
+    close_db()
     return ('', 204)
+
+@app.route('/persons/<int:person_id>', methods=['GET', 'DELETE'])
+def manage_person(person_id):
+    if request.method == 'GET':
+        return get_person(person_id)
+    elif request.method == 'DELETE':
+        return delete_person(person_id)
+
+def get_person(person_id):
+    db = get_db()
+    result = db.execute('SELECT * FROM persons WHERE id = ?', (person_id,))
+    person = dict(result.fetchone())
+    close_db()
+    return jsonify(person)
+
+def delete_person(person_id):
+    db = get_db()
+    db.execute('DELETE FROM persons WHERE id = ?', (person_id,))
+    db.commit()
+    close_db()
+    return ('',204)
