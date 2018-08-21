@@ -163,3 +163,29 @@ def delete_payments():
     db.commit()
     close_db()
     return ('', 204)
+
+
+@app.route('/payments/<int:payment_id>', methods=['GET', 'DELETE'])
+def manage_payment(payment_id):
+    if request.method == 'GET':
+        return get_payment(payment_id)
+    elif request.method == 'DELETE':
+        return delete_payment(payment_id)
+
+
+def get_payment(payment_id):
+    db = get_db()
+    result = db.execute('SELECT * FROM payments WHERE id = ?', (payment_id,))
+    payment = dict(result.fetchone())
+    expand_payment(payment)
+    close_db()
+    return jsonify(payment)
+
+
+def delete_payment(payment_id):
+    db = get_db()
+    db.execute('DELETE FROM payees WHERE payment_id = ?', (payment_id,))
+    db.execute('DELETE FROM payments WHERE id = ?', (payment_id,))
+    db.commit()
+    close_db()
+    return ('',204)
