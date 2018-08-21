@@ -156,7 +156,7 @@ def post_payment():
     return ('', 201)
 
 
-def delete_playments():
+def delete_payments():
     db = get_db()
     db.execute('DELETE FROM payees')
     db.execute('DELETE FROM payments')
