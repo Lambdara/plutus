@@ -16,7 +16,7 @@
       <tr>
         <td>{{ payment.amount }}</td>
         <td>{{ payment.payer.name }}</td>
-        <td>{% for payee in payment.payees %}{{ payee.name }}{% endfor %}</td>
+        <td>{% for payee in payment.payees %}{{ payee.name }} {% endfor %}</td>
         <td>{{ payment.description }}</td>
       </tr>
       {% endfor %}
