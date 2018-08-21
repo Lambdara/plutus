@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Plutus - Balances</title>
+  </head>
+  <body>
+    <h1>Balances</h1>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Balance</th>
+      </tr>
+      {% for balance in balances %}
+      <tr>
+        <td>{{ balance.name }}</td>
+        <td>{{ balance.balance }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

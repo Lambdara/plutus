@@ -1,6 +1,7 @@
 from db import get_db, close_db
 from persons import *
 from payments import *
+from balances import *
 
 from flask import Flask, request, jsonify, abort, render_template
 import re
@@ -82,3 +83,11 @@ def manage_payment(payment_id):
     elif request.method == 'DELETE':
         delete_payment(payment_id)
         return ('',204)
+
+
+@app.route('/balances', methods=['GET'])
+def get_balances():
+    return render_template(
+        'balances.html',
+        balances = calculate_balances()
+    )
