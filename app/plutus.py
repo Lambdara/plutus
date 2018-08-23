@@ -89,5 +89,6 @@ def manage_payment(payment_id):
 def get_balances():
     return render_template(
         'balances.html',
-        balances = calculate_balances()
+        balances = calculate_balances(),
+        transactions = resolve_transactions()
     )

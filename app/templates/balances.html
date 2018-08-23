@@ -5,6 +5,7 @@
   </head>
   <body>
     <h1>Balances</h1>
+    <h2>Current Balances</h2>
     <table>
       <tr>
         <th>Name</th>
@@ -14,6 +15,21 @@
       <tr>
         <td>{{ balance.name }}</td>
         <td>{{ balance.balance }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <h2>Easiest way to resolve</h2>
+    <table>
+      <tr>
+        <th>From</th>
+        <th>To</th>
+        <th>Amount</th>
+      </tr>
+      {% for transaction in transactions %}
+      <tr>
+        <td>{{ transaction.from }}</td>
+        <td>{{ transaction.to }}</td>
+        <td>{{ transaction.amount }}</td>
       </tr>
       {% endfor %}
     </table>

@@ -22,3 +22,23 @@ def calculate_balances():
             balances[payee_id]['balance'] -= amount / len(payee_ids)
             
     return [balance for key,balance in balances.items()]
+
+
+def resolve_transactions():
+    balances = calculate_balances()
+    transactions = []
+
+    for balance in balances:
+        if (balance['balance'] < 0):
+            for other_balance in balances:
+                if other_balance['balance'] > 0 and balance['balance'] < 0:
+                    amount = min(-balance['balance'], other_balance['balance'])
+                    transactions.append({
+                        'from': balance['name'],
+                        'to': other_balance['name'],
+                        'amount': amount
+                    })
+                    balance['balance'] += amount
+                    other_balance['balance'] -= amount
+
+    return transactions
