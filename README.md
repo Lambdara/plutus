@@ -13,6 +13,23 @@ Plutus implements a REST-API and provides a web-interface to easily access it.
 | `/payments/`             | GET, POST, DELETE | Index of payments |
 | `/payments/<PAYMENT_ID>` | GET, DELETE       | Payment object    |
 
+Person:
+```
+{
+    "name": <STRING>
+}
+```
+
+Payment:
+```
+{
+    "description": <STRING>,
+    "amount": <NUMBER>,
+    "payer_id": <PERSON.ID>,
+    "payee_ids": [<PERSON.ID>, ...]
+}
+```
+
 ## Dependencies
 
 - Flask
